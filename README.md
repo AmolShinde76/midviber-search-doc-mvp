@@ -75,9 +75,10 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 
 ### Post-Deployment
 1. Update domain in `nginx.conf` and `frontend/my-app/.env.production`
-2. Set OpenAI API key in `backend/.env`
+2. Set your OpenAI API key in `backend/.env`
 3. Run `sudo certbot --nginx -d yourdomain.com` for SSL
-4. Start services and visit `https://yourdomain.com`
+4. **For subdomain support**: Add `gpt.yourdomain.com` to DNS and SSL certificates
+5. Start services and visit `https://yourdomain.com` or `https://gpt.yourdomain.com`
 
 ## Features
 

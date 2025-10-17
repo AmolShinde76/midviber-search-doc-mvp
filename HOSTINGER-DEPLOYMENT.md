@@ -262,8 +262,8 @@ sudo systemctl reload nginx
 # Install Certbot
 sudo apt install -y certbot python3-certbot-nginx
 
-# Get SSL certificate
-sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+# Get SSL certificate (include subdomain)
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com -d gpt.yourdomain.com
 
 # Test renewal
 sudo certbot renew --dry-run
@@ -271,13 +271,13 @@ sudo certbot renew --dry-run
 
 ### 9. Final Configuration
 
-Update backend `.env` with production origins:
+Update backend `.env` with production origins (including subdomain):
 ```bash
 nano backend/.env
 ```
 Update ALLOWED_ORIGINS:
 ```
-ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
+ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com,https://gpt.yourdomain.com
 ```
 
 ### 10. Hostinger Specific Considerations
@@ -287,7 +287,8 @@ ALLOWED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
 2. Go to Domain → DNS
 3. Add A record: `@` → your VPS IP
 4. Add A record: `www` → your VPS IP
-5. Wait for DNS propagation (can take up to 24 hours)
+5. **Add A record: `gpt` → your VPS IP** (for subdomain)
+6. Wait for DNS propagation (can take up to 24 hours)
 
 #### Firewall (Hostinger Control Panel)
 - Hostinger may have additional firewall rules
